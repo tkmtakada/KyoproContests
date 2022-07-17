@@ -12,6 +12,6 @@ def test():
     return []
 
 if __name__=="__main__":
-    # args = input_args()
-    args = test()
+    args = input_args()
+    # args = test()
     solve(*args)
