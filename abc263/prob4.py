@@ -1,6 +1,6 @@
 
 
-def solve(N, L, R, A):
+def mysolve(N, L, R, A):
     # LEFT 
     
     # get cumsum
@@ -59,7 +59,20 @@ def solve(N, L, R, A):
 
     return 0
 
+def solve(N, L, R, A):
+    f = [0 for _ in range(N+1)]
+    for i in range(N):
+        f[i+1] = min(f[i] + A[i], L * (i+1))
 
+    g = [0 for _ in range(N+1)]
+    for j in range(N):
+        g[j+1] = min(g[j] + A[-(j+1)] , R * (j+1))
+
+    h = [0 for _ in range(N+1)]
+    for i in range(len(f)):
+        h[i] = f[i] + g[N-i]
+    
+    print(min(h))
 
 def input_args():
     N, L, R = map(int, input().split())
