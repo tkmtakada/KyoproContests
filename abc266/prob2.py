@@ -1,12 +1,16 @@
 
 
-def solve():
+def solve(N):
+    k = 998244353
+    r = N % k
+    print(r)
     return 0
 
 
 
 def input_args():
-    return []
+    N = int(input())
+    return [N]
 
 def test():
     return []
