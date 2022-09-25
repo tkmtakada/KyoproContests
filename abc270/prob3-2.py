@@ -1,15 +1,13 @@
-"""
-RE
-
-アルゴリズムはあってるはず、模範解答ともほぼ一致（Dequeをつかってたが）
-"""
+from collections import deque
 
 def solve(N, X, Y, adj):
     # bfsだと、単純バスは出しづらい
     # dfsで
     used = [0 for _ in range(N)]
     used[X-1] = 1
-    dfs(adj, [X-1], Y, used)
+    deq = deque()
+    deq.append(X-1)
+    dfs(adj, deq, Y, used)
     return 0
 
 def dfs(adj, path, Y, used):
@@ -27,11 +25,12 @@ def dfs(adj, path, Y, used):
         if used[elt] == 0:
             used[elt] = 1
             dfs(adj, path+[elt], Y, used)
-            used[elt] = 0  # 模範解答では、ここがないかも？確かにdequeを使って分岐点まで戻れるなら、いらないかも？
-
-
+            used[elt] = 0
 
 def input_args():
+    return []
+
+def test():
     N, X, Y = map(int, input().split())
     adj = [[] for _ in range(N)]
     for _ in range(N-1):
@@ -39,18 +38,6 @@ def input_args():
         adj[u-1].append(v-1)
         adj[v-1].append(u-1)
     return [N, X, Y, adj]
-
-def test():
-    """
-    6 1 5
-    1 2
-    1 3
-    2 3
-    3 6
-    3 4
-    """
-    return []
-
 
 
 if __name__=="__main__":
