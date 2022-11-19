@@ -13,17 +13,19 @@ def main(N, ladder, stories):
     print(1)
     return
 
-def solve(N, ladder, start):
+from collections import deque
+def solve(N, ladder):
     # bfs
     maxHeight = 1
     visited = set([])
-    q = [start]    
+    q = deque()
+    q.append(1)
     while len(q) > 0:
         len_q = len(q)
         for _ in range(len_q):
-            elt = q.pop(0)
+            elt = q.popleft()
             # maxHeight = max(maxHeight, elt)
-            if elt == 1: return True
+            # if elt == 1: return True
 
             visited.add(elt)
             if elt in ladder:
@@ -32,7 +34,8 @@ def solve(N, ladder, start):
             else:
                 pass
     # print(maxHeight)
-    return False
+    print(max(visited))
+    # return False
     return 0
 
 
@@ -54,7 +57,7 @@ def input_args():
         else:
             ladder[b] = [a]
         
-    return [N, ladder, stories]
+    return [N, ladder]
 
 def test():
     return []
@@ -62,4 +65,4 @@ def test():
 if __name__=="__main__":
     args = input_args()
     # args = test()
-    main(*args)
+    solve(*args)
